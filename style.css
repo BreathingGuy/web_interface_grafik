@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.fixed-column,
+.scrollable-column {
+    border-collapse: collapse;
+}
+
+.fixed-column th,
+.fixed-column td,
+.scrollable-column th,
+.scrollable-column td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    height: 16px;
+    width: 19px;
+    /* Фиксированная высота строк для синхронизации */
+}
+
+.fixed-column th,
+.scrollable-column th {
+    background: #f2f2f2;
+}
+
+.fixed-column {
+    width: 200px;
+}
+
+/* Ширина колонки с именами */
+.scrollable-column {
+    width: calc(100% - 200px);
+}
+
+.scrollable-container {
+    overflow-x: auto ;
+    /* Горизонтальная прокрутка */
+    max-width: calc(100% - 200px);
+}
+
+.scrollable-container::-webkit-scrollbar {
+    /* display: none; */
+    width: 7px;
+    background-color: #f9f9fd;
+}
+
+.working {
+    background: #d4edda;
+}
+
+.dayoff {
+    background: #f8d7da;
+}
+
+.study {
+    background: #fff3cd;
+}
+
+.vacation {
+    background: #d1ecf1;
+}
+
+input,
+select {
+    padding: 8px;
+    margin: 10px 0;
+    width: 200px;
+}
