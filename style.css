@@ -1,9 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
     box-sizing: border-box;
+    margin: 20px;
     padding: 0;
-    margin: 0
 }
 
 /*###### ТАБЛИЦА */
@@ -19,7 +18,7 @@ body {
 }
 
 .scrollable-column {
-    min-width: 1000px;
+    min-width: 1500px;
 }
 
 .fixed-column {
@@ -57,11 +56,16 @@ body {
 .scrollable-container {
     overflow-x: auto ;
     border-right: 1px solid #ccc;
-    /* max-width: 100%; */
-    max-width: calc(100% - 400px);
+    max-width: calc(100% - 200px);
     -ms-overflow-style: none; 
     scrollbar-width: thin;
     scrollbar-color: rgb(113, 112, 112) #f9f9fd;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    display: none;
+    background-color: #f9f9fd;
+    border-radius: 10px;
 }
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
