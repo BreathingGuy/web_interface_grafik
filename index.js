@@ -416,14 +416,17 @@ const rawData = {
 
 // Преобразуем данные в удобный формат
 const employeeData = rawData.data.map(employee => ({
-    name: `${employee.fio.family} ${employee.fio.name1} ${employee.fio.name2}`,
+    name: `${employee.fio.family} ${employee.fio.name1[0]}.${employee.fio.name2[0]}`,
     schedule: Object.entries(employee.schedule).map(([date, status]) => ({
         date: `2025-${date}`,
         status: status
     }))
 }));
 
-const months = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
+const months = ["январь", "февраль", "март", 
+                "апрель", "май", "июнь", 
+                "июль", "август", "сентябрь", 
+                "октябрь", "ноябрь", "декабрь"];
 
 // Функция рендеринга таблиц
 function renderTables(data, period = '3months') {
@@ -436,11 +439,11 @@ function renderTables(data, period = '3months') {
     nameThead.innerHTML = '';
     scheduleThead.innerHTML = '';
 
-    const today = new Date(2025, 9, 10); // Текущая дата: 10 октября 2025
+    const today = new Date(); // Текущая дата
     today.setUTCHours(3, 0, 0, 0); // Московское время (UTC+3)
 
-    let startDate = new Date(today);
-    let endDate = new Date(today);
+    let startDate = new Date();
+    let endDate = new Date();
 
     if (period === '3months') {
         const quarter = Math.floor(today.getMonth() / 3);
@@ -466,7 +469,7 @@ function renderTables(data, period = '3months') {
                     (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' +
                     currentDate.getDate().toString().padStart(2, '0'));
         currentDate.setDate(currentDate.getDate() + 1);
-    }
+    }    
 
     // Группировка по месяцам для colspan
     const curDate = new Date()

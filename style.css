@@ -1,84 +1,71 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0
 }
 
+/*###### ТАБЛИЦА */
 .container {
     display: flex;
     align-items: baseline;
 }
 
+/* ## колонки */
 .fixed-column,
 .scrollable-column {
     border-collapse: collapse;
-}
-
-.fixed-column {
-    width: 250px;
-    table-layout: fixed;
-}
-
-.fixed-column th,
-.fixed-column td,
-.scrollable-column th,
-.scrollable-column td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-    height: 20px; 
-}
-
-.scrollable-column th,
-.scrollable-column td {
-    width: 50px;
-    /* padding: 8px; */
-}
-
-
-
-.fixed-column td {
-    width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.scrollable-container {
-    overflow-x: auto;
-    max-width: 80%;
 }
 
 .scrollable-column {
     min-width: 1000px;
 }
 
-.scrollable-container::-webkit-scrollbar {
-    height: 8px;
+.fixed-column {
+    width: 250px;
+    table-layout: fixed;
+    text-align: left;
 }
 
-.scrollable-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
+/* ## ячейки */
+.fixed-column th,
+.fixed-column td,
+.scrollable-column th,
+.scrollable-column td {
+    border: 1px solid #ccc;
+    padding: 4px;
+    height: 20px; 
 }
 
-.scrollable-container::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
+.scrollable-column th,
+.scrollable-column td {
+    text-align: center;
+    width: 20px;
+    min-width: 20px;
+    max-width: 20px;
+}
+
+.fixed-column td {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 15px;
+}
+
+.scrollable-container {
+    overflow-x: auto ;
+    border-right: 1px solid #ccc;
+    /* max-width: 100%; */
+    max-width: calc(100% - 400px);
+    -ms-overflow-style: none; 
+    scrollbar-width: thin;
+    scrollbar-color: rgb(113, 112, 112) #f9f9fd;
 }
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
-
-.scrollable-container {
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
-}
-
-.scrollable-column th:not([colspan]), .scrollable-column td { /* Фиксированная ширина для дат и статусов */
-            width: 30px; /* Установи нужную ширину */
-            min-width: 30px;
-            max-width: 30px;
 }
 
 .working {
@@ -99,7 +86,14 @@ body {
 
 input,
 select {
+    padding: 4px;
+    /* padding-left: 15px; */
+    margin: 10px 0;
+}
+
+input {
     padding: 8px;
     margin: 10px 0;
-    width: 200px;
+    width: 250px;
+    box-sizing: border-box;
 }
