@@ -5,7 +5,6 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
     align-items: baseline;
 }
 
@@ -14,42 +13,72 @@ body {
     border-collapse: collapse;
 }
 
+.fixed-column {
+    width: 250px;
+    table-layout: fixed;
+}
+
 .fixed-column th,
 .fixed-column td,
 .scrollable-column th,
 .scrollable-column td {
     border: 1px solid #ccc;
     padding: 8px;
-    text-align: left;
-    height: 16px;
-    width: 19px;
-    /* Фиксированная высота строк для синхронизации */
+    text-align: center;
+    height: 20px; 
 }
 
-.fixed-column th,
-.scrollable-column th {
-    background: #f2f2f2;
+.scrollable-column th,
+.scrollable-column td {
+    width: 50px;
+    /* padding: 8px; */
 }
 
-.fixed-column {
+
+
+.fixed-column td {
     width: 200px;
-}
-
-/* Ширина колонки с именами */
-.scrollable-column {
-    width: calc(100% - 200px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .scrollable-container {
-    overflow-x: auto ;
-    /* Горизонтальная прокрутка */
-    max-width: calc(100% - 200px);
+    overflow-x: auto;
+    max-width: 80%;
+}
+
+.scrollable-column {
+    min-width: 1000px;
 }
 
 .scrollable-container::-webkit-scrollbar {
-    /* display: none; */
-    width: 7px;
-    background-color: #f9f9fd;
+    height: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.scrollable-container {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.scrollable-column th:not([colspan]), .scrollable-column td { /* Фиксированная ширина для дат и статусов */
+            width: 30px; /* Установи нужную ширину */
+            min-width: 30px;
+            max-width: 30px;
 }
 
 .working {
