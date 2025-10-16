@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+    width: 800px;
+}
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    max-width: 30px;
+    min-width: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.selected {
+    background-color: #53ce96;
+}
+.focused {
+    outline: 2px solid blue;
+}
