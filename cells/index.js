@@ -4,7 +4,6 @@ let selectedCells = [];
 let copiedCells = []
 let startCell = null;
 let undoStack = []
-let undoSelectedAreaStack = []
 
 // Обработка клавиш для копирования и вставки
 document.addEventListener('keydown', (e) => {
