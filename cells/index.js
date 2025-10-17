@@ -3,6 +3,8 @@ const status = document.getElementById('status');
 let selectedCells = [];
 let copiedCells = []
 let startCell = null;
+let undoStack = []
+let undoSelectedAreaStack = []
 
 // Обработка клавиш для копирования и вставки
 document.addEventListener('keydown', (e) => {
@@ -13,6 +15,10 @@ document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key === 'v') {
         e.preventDefault();
         pasteSelected();
+    }
+    if (e.ctrlKey && e.key === 'z') {
+        e.preventDefault();
+        undo();
     }
 });
 
@@ -143,6 +149,9 @@ function pasteSelected() {
             return;
         }
 
+        // Сохраняем текущее состояние перед вставкой
+        saveState();
+
         const tableRows = Array.from(table.rows);
         const minRow = Math.min(...selectedCells.map(cell => cell.parentNode.rowIndex));
         const minCol = Math.min(...selectedCells.map(cell => cell.cellIndex));
@@ -188,7 +197,6 @@ function pasteSelected() {
                     });
                 }
             }
-
         } else {
             console.log('BASIC COPYING');
             data.forEach((row, rIndex) => {
@@ -208,4 +216,40 @@ function pasteSelected() {
         status.textContent = 'Ошибка вставки: ' + err;
         console.error('Ошибка вставки:', err);
     });
+}
+
+// Сохранение состояния таблицы перед изменением
+function saveState() {
+    const rows = Array.from(table.rows);
+    const state = [];
+    for (let r = 0; r < rows.length; r++) {
+        const rowData = [];
+        for (let c = 0; c < rows[r].cells.length; c++) {
+            rowData.push(rows[r].cells[c].innerText);
+        }
+        state.push(rowData);
+    }
+    undoStack.push(state);
+}
+
+// Восстановление предыдущего состояния
+function undo() {
+    if (undoStack.length === 0) {
+        status.textContent = 'Нет изменений для отмены';
+        setTimeout(() => status.textContent = '', 2000);
+        return;
+    }
+
+    const state = undoStack.pop();
+    const tableRows = Array.from(table.rows);
+    state.forEach((row, rIndex) => {
+        row.forEach((value, cIndex) => {
+            if (tableRows[rIndex] && tableRows[rIndex].cells[cIndex]) {
+                tableRows[rIndex].cells[cIndex].innerText = value;
+            }
+        });
+    });
+
+    status.textContent = 'Изменения отменены';
+    setTimeout(() => status.textContent = '', 2000);
 }
